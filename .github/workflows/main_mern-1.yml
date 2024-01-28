@@ -73,7 +73,6 @@ jobs:
         with:
           app-name: 'mern-1'
           slot-name: 'Production'
-          package: ./backend
-          remove-old-versions: true  # Add this option to clean existing content
+          package: .
 
           
