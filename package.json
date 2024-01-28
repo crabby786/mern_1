@@ -1,0 +1,13 @@
+{
+  "name": "mernapp",
+  "version": "1.0.0",
+  "description": "My fullstack app with Node.js backend and React frontend",
+  "main": "backend/app.js",
+  "scripts": {
+    "pm2-start": "pm2 app.js",
+    "build": "cd frontend && npm run build && cd ..",
+    "start": "node backend/app.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,56 +1,56 @@
-var express = require('express');
-const cors = require('cors');
-var dotenv = require('dotenv');
+var express = require("express");
+const cors = require("cors");
+var dotenv = require("dotenv");
 dotenv.config();
-const mongoose = require('mongoose');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-var logger = require('morgan');
+const mongoose = require("mongoose");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+var logger = require("morgan");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
 
 var app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(bodyParser.json()); // todo test later
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static("../frontend/build"))
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("/app", (req, res) => {
- res.sendFile(path.resolve(__dirname,"../" ,"frontend", "build", "index.html")); 
-});
+// app.get("/app", (req, res) => {
+//  res.sendFile(path.resolve(__dirname,"../" ,"frontend", "build", "index.html"));
+// });
 
-mongoose.connect(process.env.DB_URL, {
- useNewUrlParser: true,
- useUnifiedTopology: true
-})
-.then(() => {
-    console.log('Connected to MongoDB...');
+mongoose
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB...");
     let port = process.env.PORT || 3001;
-    app.listen(port, () => {
+    app
+      .listen(port, () => {
         console.log(`Server is running on port ${port}`);
-    }).on('error', (err) => {
-        if (err.code === 'EADDRINUSE') {
-            console.log(`Port ${port} is already in use.`);
-        } else if (err.code === 'EACCES') {
-            console.log(`Port ${port} requires elevated privileges.`);
+      })
+      .on("error", (err) => {
+        if (err.code === "EADDRINUSE") {
+          console.log(`Port ${port} is already in use.`);
+        } else if (err.code === "EACCES") {
+          console.log(`Port ${port} requires elevated privileges.`);
         } else {
-            console.log(err);
+          console.log(err);
         }
-    });
-})
-.catch((error) => console.error('Could not connect to MongoDB...', error));
+      });
+  })
+  .catch((error) => console.error("Could not connect to MongoDB...", error));
 
-
-
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use("/api", indexRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;
+
