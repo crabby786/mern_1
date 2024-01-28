@@ -24,7 +24,7 @@ class UsersListErrorBoundary extends React.Component {
   }
 }
 
-var base_url = "https://mern-1.azurewebsites.net";
+var base_url = "https://mern-1.azurewebsites.net/api";
 console.log("base_url", base_url);
 // my comment
 
