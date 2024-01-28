@@ -73,5 +73,5 @@ jobs:
         with:
           app-name: 'mern-1'
           slot-name: 'Production'
-          package: .
+          package: ./backend
           
